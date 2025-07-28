@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Management - Pahana Edu</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+    <h2 class="mb-4">Customer Management</h2>
+
+    <!-- Add Customer Form -->
+    <div class="card p-4 shadow-sm">
+        <form id="customerForm">
+            <div class="mb-3">
+                <label for="accountNumber" class="form-label">Account Number</label>
+                <input type="text" class="form-control" id="accountNumber" name="accountNumber" required>
+            </div>
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="address" class="form-label">Address</label>
+                <textarea class="form-control" id="address" name="address" rows="2" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="telephone" class="form-label">Telephone</label>
+                <input type="tel" class="form-control" id="telephone" name="telephone" required>
+            </div>
+            <div class="mb-3">
+                <label for="unitsConsumed" class="form-label">Units Consumed</label>
+                <input type="number" class="form-control" id="unitsConsumed" name="unitsConsumed" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Customer</button>
+            <button type="reset" class="btn btn-secondary">Clear</button>
+        </form>
+    </div>
+</div>
+
+<!-- Optional: Bootstrap JS (for dropdowns/modals if needed) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Optional: Add script for form submission to API -->
+<script>
+document.getElementById("customerForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const customer = {
+        accountNumber: document.getElementById("accountNumber").value,
+        name: document.getElementById("name").value,
+        address: document.getElementById("address").value,
+        telephone: document.getElementById("telephone").value,
+        unitsConsumed: parseInt(document.getElementById("unitsConsumed").value)
+    };
+
+    fetch("http://localhost:8080/PahanaEduBackEnd/resources/customers", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(customer)
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert("Customer added successfully!");
+        document.getElementById("customerForm").reset();
+    })
+    .catch(error => {
+        console.error("Error adding customer:", error);
+        alert("Failed to add customer.");
+    });
+});
+</script>
+
+</body>
+</html>
+
