@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pahana Billing System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+  <style>
+    @media print {
+      body {
+        background: white !important;
+        color: black !important;
+      }
+
+      #bill-section {
+        background: white !important;
+        color: black !important;
+        opacity: 1 !important;
+        box-shadow: none !important;
+      }
+
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+    }
+
+    #bill-section {
+      background-color: white !important;
+      color: black !important;
+      opacity: 1 !important;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 min-h-screen p-4">
+  <div class="max-w-4xl mx-auto">
+    <!-- Invoice Section -->
+    <div id="bill-section" class="bg-white text-black p-8 rounded shadow space-y-6">
+      <!-- Logo & Header -->
+      <div class="flex items-center justify-between border-b pb-4">
+        <div class="flex items-center gap-2">
+          <img src="https://img.icons8.com/ios-filled/50/000000/invoice.png" alt="Logo" class="w-10 h-10" />
+          <div>
+            <h1 class="text-2xl font-bold">Pahana Billing System</h1>
+            <p class="text-sm text-gray-600">Professional Invoice Generation</p>
+          </div>
+        </div>
+        <div class="text-right">
+          <p><strong>Invoice #:</strong> INV-20250729</p>
+          <p><strong>Date:</strong> <span id="invoice-date"></span></p>
+        </div>
+      </div>
+
+      <!-- Customer Info -->
+      <div>
+        <h2 class="text-xl font-semibold mb-2">Customer Information</h2>
+        <div class="border rounded p-4 space-y-1">
+          <p><strong>Name:</strong> Kamal Silva</p>
+          <p><strong>Address:</strong> Kandy</p>
+          <p><strong>Phone:</strong> 0719876543</p>
+          <p><strong>Email:</strong> kamal@example.com</p>
+        </div>
+      </div>
+
+      <!-- Item Table -->
+      <div>
+        <h2 class="text-xl font-semibold mb-2">Items</h2>
+        <table class="w-full border text-sm">
+          <thead class="bg-gray-200">
+            <tr>
+              <th class="p-2 border">Item</th>
+              <th class="p-2 border">Quantity</th>
+              <th class="p-2 border">Unit Price</th>
+              <th class="p-2 border">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-2 border">Book A</td>
+              <td class="p-2 border">2</td>
+              <td class="p-2 border">Rs. 500.00</td>
+              <td class="p-2 border">Rs. 1000.00</td>
+            </tr>
+            <tr>
+              <td class="p-2 border">Pen Pack</td>
+              <td class="p-2 border">1</td>
+              <td class="p-2 border">Rs. 500.00</td>
+              <td class="p-2 border">Rs. 500.00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Total Section -->
+      <div class="text-right text-lg font-semibold">
+        <p>Total Amount: Rs. 1500.00</p>
+      </div>
+
+      <!-- Signature and Footer -->
+      <div class="flex justify-between items-center mt-6 pt-4 border-t">
+        <div>
+          <p class="text-sm text-gray-600">Thank you for your business!</p>
+        </div>
+        <div class="text-right">
+          <p class="text-sm text-gray-600">Authorized Signature</p>
+          <div class="w-40 h-12 border-b border-gray-400 mt-2"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex justify-end gap-2 mt-6">
+      <button onclick="downloadPDF()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Download PDF</button>
+      <button onclick="window.print()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Print</button>
+    </div>
+  </div>
+
+  <script>
+    // Set today's date in invoice
+    document.getElementById("invoice-date").innerText = new Date().toLocaleDateString();
+
+    function downloadPDF() {
+      const element = document.getElementById("bill-section");
+      const opt = {
+        margin: 0.3,
+        filename: 'pahana-invoice.pdf',
+        image: { type: 'jpeg', quality: 1 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
+      html2pdf().set(opt).from(element).save();
+    }
+  </script>
+</body>
+</html>
