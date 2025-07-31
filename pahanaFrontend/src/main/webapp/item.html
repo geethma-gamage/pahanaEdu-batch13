@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pahana Edu Item Management</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+  <div class="container mx-auto px-4 py-6">
+    <h1 class="text-3xl font-bold text-center mb-8 text-blue-700">Pahana Edu Item Management</h1>
+
+    <!-- Message -->
+    <div id="message" class="hidden p-4 mb-6 rounded text-white text-center font-semibold"></div>
+
+    <!-- Two-Column Responsive Layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+      <!-- LEFT COLUMN: Add / Update Form -->
+      <div>
+        <!-- Add Item Form -->
+        <div id="addFormContainer" class="bg-white p-6 rounded-xl shadow-md mb-6">
+          <h2 class="text-xl font-semibold mb-4 text-gray-800">Add New Item</h2>
+          <form id="addItemForm" class="grid grid-cols-1 gap-4">
+            <input type="text" id="name" name="name" placeholder="Item Name" required class="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-300">
+            <input type="text" id="category" name="category" placeholder="Category" class="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-300">
+            <input type="number" id="price" name="price" placeholder="Price" step="0.01" class="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-300">
+            <input type="number" id="quantity" name="quantity" placeholder="Quantity" class="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-300">
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded shadow">Add Item</button>
+          </form>
+        </div>
+
+        <!-- Update Item Form -->
+        <div id="updateItemFormContainer" class="hidden bg-white p-6 rounded-xl shadow-md mb-6">
+          <h2 class="text-xl font-semibold mb-4 text-gray-800">Update Item</h2>
+          <form id="updateItemForm" class="grid grid-cols-1 gap-4">
+            <input type="hidden" id="updateId" name="id">
+            <input type="text" id="updateName" name="name" placeholder="Item Name" required class="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-300">
+            <input type="text" id="updateCategory" name="category" placeholder="Category" class="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-300">
+            <input type="number" id="updatePrice" name="price" placeholder="Price" step="0.01" class="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-300">
+            <input type="number" id="updateQuantity" name="quantity" placeholder="Quantity" class="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-300">
+            <div class="flex justify-between">
+              <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded shadow">Update</button>
+              <button type="button" id="cancelUpdate" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: Search + Table -->
+      <div>
+        <!-- Search bar -->
+        <div class="flex mb-4">
+          <input type="text" id="searchInput" placeholder="Search by item name..." class="flex-grow p-2 border rounded-l focus:outline-none focus:ring-2 focus:ring-blue-300" />
+          <button id="clearSearch" class="bg-red-500 text-white px-4 rounded-r hover:bg-red-600">Clear</button>
+        </div>
+
+        <!-- Table -->
+        <div class="bg-white p-4 rounded-xl shadow-md overflow-x-auto">
+          <table class="w-full text-sm text-left border-collapse">
+            <thead class="bg-blue-100">
+              <tr>
+                <th class="p-2 border">ID</th>
+                <th class="p-2 border">Name</th>
+                <th class="p-2 border">Category</th>
+                <th class="p-2 border">Price</th>
+                <th class="p-2 border">Quantity</th>
+                <th class="p-2 border">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="itemsTableBody" class="text-gray-700"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS Script -->
+  <script>
+    const apiBaseUrl = 'http://localhost:8080/pahanaBackend/resources/items';
+    let allItems = [];
+
+    function showMessage(message, isError = false) {
+      const msg = document.getElementById('message');
+      msg.textContent = message;
+      msg.className = `p-4 mb-6 rounded text-white text-center font-semibold ${isError ? 'bg-red-500' : 'bg-green-500'}`;
+      msg.classList.remove('hidden');
+      setTimeout(() => msg.classList.add('hidden'), 3000);
+    }
+
+    async function fetchItems() {
+      try {
+        const res = await fetch(apiBaseUrl);
+        allItems = await res.json();
+        renderTable(allItems);
+      } catch (e) {
+        showMessage(e.message, true);
+      }
+    }
+
+    function renderTable(items) {
+      const tbody = document.getElementById('itemsTableBody');
+      tbody.innerHTML = '';
+
+      if (items.length === 0) {
+        const row = document.createElement('tr');
+        row.innerHTML = `<td colspan="6" class="text-center text-gray-500 py-4">No items found.</td>`;
+        tbody.appendChild(row);
+        return;
+      }
+
+      items.forEach(item => {
+        const row = document.createElement('tr');
+        row.classList.add('hover:bg-gray-100');
+        row.innerHTML = `
+          <td class="p-2 border">${item.id}</td>
+          <td class="p-2 border">${item.name}</td>
+          <td class="p-2 border">${item.category || ''}</td>
+          <td class="p-2 border">${item.price?.toFixed(2) || ''}</td>
+          <td class="p-2 border">${item.quantity || ''}</td>
+          <td class="p-2 border">
+            <button onclick="editItem(${item.id})" class="bg-yellow-500 hover:bg-yellow-600 text-white px-2 py-1 rounded">Edit</button>
+            <button onclick="deleteItem(${item.id})" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded">Delete</button>
+          </td>`;
+        tbody.appendChild(row);
+      });
+    }
+
+    document.getElementById('addItemForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const item = {
+        name: form.name.value,
+        category: form.category.value || null,
+        price: parseFloat(form.price.value) || 0,
+        quantity: parseInt(form.quantity.value) || 0
+      };
+      try {
+        const res = await fetch(apiBaseUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(item)
+        });
+        const result = await res.json();
+        if (res.ok) {
+          showMessage('Item added successfully');
+          form.reset();
+          fetchItems();
+        } else {
+          showMessage(result.error || 'Failed to add item', true);
+        }
+      } catch (e) {
+        showMessage(e.message, true);
+      }
+    });
+
+    async function editItem(id) {
+      try {
+        const res = await fetch(`${apiBaseUrl}/${id}`);
+        const item = await res.json();
+        document.getElementById('updateId').value = item.id;
+        document.getElementById('updateName').value = item.name;
+        document.getElementById('updateCategory').value = item.category || '';
+        document.getElementById('updatePrice').value = item.price || '';
+        document.getElementById('updateQuantity').value = item.quantity || '';
+        document.getElementById('updateItemFormContainer').classList.remove('hidden');
+        document.getElementById('addFormContainer').classList.add('hidden');
+      } catch (e) {
+        showMessage(e.message, true);
+      }
+    }
+
+    document.getElementById('updateItemForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const item = {
+        id: parseInt(form.id.value),
+        name: form.name.value,
+        category: form.category.value || null,
+        price: parseFloat(form.price.value) || 0,
+        quantity: parseInt(form.quantity.value) || 0
+      };
+      try {
+        const res = await fetch(`${apiBaseUrl}/${item.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(item)
+        });
+        const result = await res.json();
+        if (res.ok) {
+          showMessage('Item updated successfully');
+          document.getElementById('updateItemFormContainer').classList.add('hidden');
+          document.getElementById('addFormContainer').classList.remove('hidden');
+          fetchItems();
+        } else {
+          showMessage(result.error || 'Failed to update item', true);
+        }
+      } catch (e) {
+        showMessage(e.message, true);
+      }
+    });
+
+    document.getElementById('cancelUpdate').addEventListener('click', () => {
+      document.getElementById('updateItemFormContainer').classList.add('hidden');
+      document.getElementById('addFormContainer').classList.remove('hidden');
+    });
+
+    async function deleteItem(id) {
+      if (!confirm('Are you sure you want to delete this item?')) return;
+      try {
+        const res = await fetch(`${apiBaseUrl}/${id}`, { method: 'DELETE' });
+        const result = await res.json();
+        if (res.ok) {
+          showMessage('Item deleted successfully');
+          fetchItems();
+        } else {
+          showMessage(result.error || 'Failed to delete item', true);
+        }
+      } catch (e) {
+        showMessage(e.message, true);
+      }
+    }
+
+    // Search and clear
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase();
+      const filtered = allItems.filter(item => item.name.toLowerCase().includes(query));
+      renderTable(filtered);
+    });
+
+    document.getElementById('clearSearch').addEventListener('click', () => {
+      document.getElementById('searchInput').value = '';
+      renderTable(allItems);
+    });
+
+    // Initial load
+    fetchItems();
+  </script>
+</body>
+</html>

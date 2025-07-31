@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pahana Edu - Bill Records</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen p-8">
+  <h1 class="text-3xl font-bold text-center text-blue-800 mb-8">Bill Records</h1>
+
+  <div class="overflow-x-auto">
+    <table id="billsTable" class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+      <thead class="bg-blue-800 text-white">
+        <tr>
+          <th class="py-3 px-4 text-left">Bill ID</th>
+          <th class="py-3 px-4 text-left">Account Number</th>
+          <th class="py-3 px-4 text-left">Customer Name</th>
+          <th class="py-3 px-4 text-left">Total Amount</th>
+          <th class="py-3 px-4 text-left">Created At</th>
+        </tr>
+      </thead>
+      <tbody id="billsBody" class="text-gray-700">
+        <!-- Bill rows will be injected here -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    // Replace this URL with your actual backend endpoint
+    const apiUrl = "http://localhost:8080/pahanaBackend/resources/bills";
+
+    // Load bill data
+    async function loadBills() {
+      try {
+        const response = await fetch(apiUrl);
+        const bills = await response.json();
+
+        const tbody = document.getElementById("billsBody");
+        tbody.innerHTML = "";
+
+        if (bills.length === 0) {
+          const row = document.createElement("tr");
+          row.innerHTML = `<td colspan="5" class="py-4 px-4 text-center text-gray-500">No bill records found.</td>`;
+          tbody.appendChild(row);
+        } else {
+          bills.forEach(bill => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+              <td class="py-3 px-4">${bill.bill_id}</td>
+              <td class="py-3 px-4">${bill.account_number}</td>
+              <td class="py-3 px-4">${bill.customer_name}</td>
+              <td class="py-3 px-4">Rs. ${bill.total_amount.toFixed(2)}</td>
+              <td class="py-3 px-4">${new Date(bill.created_at).toLocaleString()}</td>
+            `;
+            tbody.appendChild(row);
+          });
+        }
+      } catch (error) {
+        console.error("Failed to load bills:", error);
+      }
+    }
+
+    loadBills();
+  </script>
+</body>
+</html>

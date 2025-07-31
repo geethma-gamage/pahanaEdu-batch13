@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>View Bills - Pahana Edu</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-8">
+  <h1 class="text-3xl font-bold mb-6 text-blue-800">Bills Table</h1>
+
+  <!-- Search bar -->
+  <div class="mb-4">
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search by Customer Name..."
+      class="w-full p-2 border border-gray-300 rounded"
+      oninput="filterBills()"
+    />
+  </div>
+
+  <div class="overflow-x-auto bg-white p-4 rounded shadow">
+    <table class="min-w-full table-auto border border-gray-300" id="billsTable">
+      <thead class="bg-blue-100">
+        <tr>
+          <th class="px-4 py-2 border">Bill ID</th>
+          <th class="px-4 py-2 border">Account Number</th>
+          <th class="px-4 py-2 border">Customer Name</th>
+          <th class="px-4 py-2 border">Total Amount</th>
+          <th class="px-4 py-2 border">Created At</th>
+        </tr>
+      </thead>
+      <tbody id="billsBody">
+        <!-- Data will be injected here -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    let billsData = []; // store fetched bills here for filtering
+
+    async function loadBills() {
+      try {
+        const response = await fetch("http://localhost:8080/pahanaBackend/resources/bills");
+        if (!response.ok) {
+          throw new Error("HTTP error " + response.status);
+        }
+        billsData = await response.json();
+        renderBills(billsData);
+      } catch (error) {
+        console.error("Failed to load bills:", error);
+        alert("Error loading bills data. See console.");
+      }
+    }
+
+    function renderBills(bills) {
+      const tbody = document.getElementById("billsBody");
+      tbody.innerHTML = "";
+
+      if (!bills || bills.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" class="text-center py-4 text-gray-500">No bills found</td></tr>`;
+        return;
+      }
+
+      bills.forEach(bill => {
+        const dateString = bill.createdAt || bill.created_at || null;
+
+        let formattedDate = "N/A";
+        if (dateString) {
+          const cleanDateString = dateString.endsWith(".0") ? dateString.slice(0, -2) : dateString;
+          const dateObj = new Date(cleanDateString);
+          if (!isNaN(dateObj)) {
+            formattedDate = dateObj.toLocaleString();
+          } else {
+            formattedDate = cleanDateString;
+          }
+        }
+
+        const row = `
+          <tr>
+            <td class="px-4 py-2 border text-center">${bill.billId}</td>
+            <td class="px-4 py-2 border text-center">${bill.accountNumber}</td>
+            <td class="px-4 py-2 border text-center">${bill.customerName}</td>
+            <td class="px-4 py-2 border text-center">Rs. ${Number(bill.totalAmount).toFixed(2)}</td>
+            <td class="px-4 py-2 border text-center">${formattedDate}</td>
+          </tr>
+        `;
+        tbody.innerHTML += row;
+      });
+    }
+
+    function filterBills() {
+      const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+      const filtered = billsData.filter(bill =>
+        bill.customerName.toLowerCase().includes(searchTerm)
+      );
+      renderBills(filtered);
+    }
+
+    loadBills();
+  </script>
+</body>
+</html>
