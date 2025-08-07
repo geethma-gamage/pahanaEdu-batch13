@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>View Items</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #a8a8a8;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-gray-100 to-blue-50 font-sans min-h-screen">
+
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold text-center mb-8 text-blue-700">📋 Item List</h1>
+
+    <div class="bg-white shadow-lg rounded-xl overflow-hidden border border-blue-200">
+      <div class="overflow-auto max-h-[600px] custom-scrollbar">
+        <table class="min-w-full text-sm text-left">
+          <thead class="bg-blue-600 text-white sticky top-0 z-10">
+            <tr>
+              <th class="px-4 py-3 border">ID</th>
+              <th class="px-4 py-3 border">Name</th>
+              <th class="px-4 py-3 border">Category</th>
+              <th class="px-4 py-3 border">Price (Rs.)</th>
+              <th class="px-4 py-3 border">Quantity</th>
+              <th class="px-4 py-3 border text-center">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="itemsTableBody" class="text-gray-700"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const apiUrl = 'http://localhost:8080/pahanaBackend/resources/items'; // adjust to your actual backend API
+
+    async function loadItems() {
+      try {
+        const res = await fetch(apiUrl);
+        const items = await res.json();
+
+        const tbody = document.getElementById('itemsTableBody');
+        tbody.innerHTML = '';
+
+        if (items.length === 0) {
+          const row = document.createElement('tr');
+          row.innerHTML = `<td colspan="6" class="text-center text-gray-500 py-6">📭 No items found.</td>`;
+          tbody.appendChild(row);
+          return;
+        }
+
+        items.forEach((item, index) => {
+          const row = document.createElement('tr');
+          row.className = index % 2 === 0 ? 'bg-gray-50' : '';
+          row.innerHTML = `
+            <td class="px-4 py-3 border">${item.id}</td>
+            <td class="px-4 py-3 border">${item.name}</td>
+            <td class="px-4 py-3 border">${item.category || '-'}</td>
+            <td class="px-4 py-3 border">Rs. ${item.price?.toFixed(2) || '0.00'}</td>
+            <td class="px-4 py-3 border">${item.quantity}</td>
+            <td class="px-4 py-3 border text-center space-x-2">
+              <button onclick="editItem(${item.id})" class="bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1 rounded">Edit</button>
+              <button onclick="deleteItem(${item.id})" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">Delete</button>
+            </td>
+          `;
+          tbody.appendChild(row);
+        });
+      } catch (err) {
+        alert("❌ Failed to load items: " + err.message);
+      }
+    }
+
+    function editItem(id) {
+      window.location.href = `edit-item.html?id=${id}`;
+    }
+
+    async function deleteItem(id) {
+      const confirmDelete = confirm(`Are you sure you want to delete item ID ${id}?`);
+      if (!confirmDelete) return;
+
+      try {
+        const res = await fetch(`${apiUrl}/${id}`, {
+          method: 'DELETE'
+        });
+
+        if (res.ok) {
+          alert('✅ Item deleted successfully');
+          loadItems(); // refresh table
+        } else {
+          const errorText = await res.text();
+          throw new Error(errorText || 'Failed to delete');
+        }
+      } catch (err) {
+        alert('❌ Error deleting item: ' + err.message);
+      }
+    }
+
+    loadItems();
+  </script>
+</body>
+</html>
