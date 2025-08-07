@@ -5,7 +5,10 @@ com\mycompany\pahanabackend\resources\ItemService.class
 Utils\Bill.class
 com\mycompany\pahanabackend\resources\ItemService$ErrorResponse.class
 com\mycompany\pahanabackend\resources\CustomerService.class
+<<<<<<< HEAD
 Utils\TenderDAO.class
+=======
+>>>>>>> 2a7c6fe (Home and others codes)
 com\mycompany\pahanabackend\resources\JakartaEE10Resource.class
 com\mycompany\pahanabackend\JakartaRestConfiguration.class
 Utils\BillItem.class
@@ -14,6 +17,9 @@ Utils\ItemDAO.class
 Utils\CustomerDAO.class
 com\mycompany\pahanabackend\resources\billsService.class
 Utils\Customer.class
+<<<<<<< HEAD
 Utils\Tender.class
+=======
+>>>>>>> 2a7c6fe (Home and others codes)
 com\mycompany\pahanabackend\resources\BillService.class
 com\mycompany\pahanabackend\resources\ItemService$SuccessResponse.class

@@ -6,6 +6,7 @@ public class BillItem {
     private int quantity;
     private double price;
 
+<<<<<<< HEAD
     // <-- Make this constructor public and implement it like this:
     public BillItem(int itemId, int quantity, double price) {
         this.itemId = itemId;
@@ -13,6 +14,8 @@ public class BillItem {
         this.price = price;
     }
 
+=======
+>>>>>>> 2a7c6fe (Home and others codes)
     public int getItemId() { return itemId; }
     public void setItemId(int itemId) { this.itemId = itemId; }
 

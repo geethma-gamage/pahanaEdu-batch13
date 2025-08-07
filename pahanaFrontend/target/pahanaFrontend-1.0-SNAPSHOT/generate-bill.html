@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 <!-- File: generate-bill.html -->
+=======
+>>>>>>> 2a7c6fe (Home and others codes)
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,14 +34,22 @@
 <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md p-6" id="bill-section">
   <h1 class="text-2xl font-bold text-center mb-6">📄 Generate Bill</h1>
 
+<<<<<<< HEAD
   <!-- Customer -->
+=======
+  <!-- Customer Selection -->
+>>>>>>> 2a7c6fe (Home and others codes)
   <div class="mb-4">
     <label class="block font-semibold mb-1">👤 Select Customer</label>
     <select id="customerSelect" class="w-full p-2 border rounded" onchange="updateCustomerDetails()"></select>
     <div id="customerDetails" class="text-sm text-gray-700 mt-2"></div>
   </div>
 
+<<<<<<< HEAD
   <!-- Item -->
+=======
+  <!-- Item Selection -->
+>>>>>>> 2a7c6fe (Home and others codes)
   <div class="mb-4">
     <label class="block font-semibold mb-1">📦 Select Item</label>
     <div class="flex space-x-2">
@@ -49,28 +60,45 @@
     <div id="itemDetails" class="text-sm text-gray-700 mt-2"></div>
   </div>
 
+<<<<<<< HEAD
   <!-- Bill Items -->
+=======
+  <!-- Bill Item List -->
+>>>>>>> 2a7c6fe (Home and others codes)
   <div class="mb-4">
     <label class="block font-semibold mb-1">🧾 Items in Bill</label>
     <ul id="billItems" class="border p-2 rounded mt-1 space-y-2"></ul>
   </div>
 
+<<<<<<< HEAD
   <!-- Total -->
+=======
+  <!-- Total Amount -->
+>>>>>>> 2a7c6fe (Home and others codes)
   <div class="text-right text-xl font-bold mb-4">
     Total: Rs. <span id="totalAmount">0.00</span>
   </div>
 
+<<<<<<< HEAD
   <!-- Buttons -->
+=======
+  <!-- Action Buttons -->
+>>>>>>> 2a7c6fe (Home and others codes)
   <div class="flex justify-between print:hidden">
     <button onclick="saveBill()" class="bg-green-600 text-white px-4 py-2 rounded">💾 Save Bill</button>
     <button onclick="printBill()" class="bg-gray-700 text-white px-4 py-2 rounded">🖨️ Print</button>
     <button onclick="downloadPDF()" class="bg-red-600 text-white px-4 py-2 rounded">⬇️ Download PDF</button>
   </div>
+<<<<<<< HEAD
 </div>
 
 <!-- Success Popup -->
 <div id="successPopup" class="fixed top-1/3 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-6 py-3 rounded-lg shadow-md hidden z-50 text-lg transition-opacity duration-300 ease-in-out">
   ✅ Bill saved successfully!
+=======
+  
+  
+>>>>>>> 2a7c6fe (Home and others codes)
 </div>
 
 <script>
@@ -201,24 +229,42 @@ async function saveBill() {
 
   const payload = {
     accountNumber: customer.accountNumber,
+<<<<<<< HEAD
     customerName: customer.name,
     totalAmount: totalAmount,
     items: bill.map(item => ({
       itemId: item.id,
       quantity: item.qty,
       price: item.price    // ✅ FIXED: added price
+=======
+    customerName: customer.name,  // Added customerName here
+    totalAmount: totalAmount,
+    items: bill.map(item => ({
+      itemId: item.id,
+      quantity: item.qty
+>>>>>>> 2a7c6fe (Home and others codes)
     }))
   };
 
   try {
     const response = await fetch("http://localhost:8080/pahanaBackend/resources/bills", {
       method: "POST",
+<<<<<<< HEAD
       headers: { "Content-Type": "application/json" },
+=======
+      headers: {
+        "Content-Type": "application/json"
+      },
+>>>>>>> 2a7c6fe (Home and others codes)
       body: JSON.stringify(payload)
     });
 
     if (response.ok) {
+<<<<<<< HEAD
       showSuccessPopup();
+=======
+      alert("✅ Bill saved successfully!");
+>>>>>>> 2a7c6fe (Home and others codes)
       bill = [];
       renderBill();
     } else {
@@ -230,6 +276,7 @@ async function saveBill() {
   }
 }
 
+<<<<<<< HEAD
 function showSuccessPopup() {
   const popup = document.getElementById("successPopup");
   popup.classList.remove("hidden");
@@ -240,6 +287,9 @@ function showSuccessPopup() {
     popup.classList.remove("opacity-100");
   }, 2500);
 }
+=======
+
+>>>>>>> 2a7c6fe (Home and others codes)
 
 function printBill() {
   window.print();
@@ -263,5 +313,9 @@ function downloadPDF() {
 
 window.onload = loadData;
 </script>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2a7c6fe (Home and others codes)
 </body>
 </html>

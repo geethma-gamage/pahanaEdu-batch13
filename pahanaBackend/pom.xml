@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <project xmlns="http://maven.apache.org/POM/4.0.0" 
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
@@ -5,12 +6,21 @@
 
     <modelVersion>4.0.0</modelVersion>
 
+=======
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+>>>>>>> 2a7c6fe (Home and others codes)
     <groupId>com.mycompany</groupId>
     <artifactId>pahanaBackend</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>pahanaBackend-1.0-SNAPSHOT</name>
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 2a7c6fe (Home and others codes)
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
@@ -18,17 +28,24 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <jakartaee>10.0.0</jakartaee>
+<<<<<<< HEAD
         <junit.jupiter.version>5.10.2</junit.jupiter.version>
     </properties>
 
     <dependencies>
         <!-- Jakarta EE API -->
+=======
+    </properties>
+    
+    <dependencies>
+>>>>>>> 2a7c6fe (Home and others codes)
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
             <version>${jakartaee}</version>
             <scope>provided</scope>
         </dependency>
+<<<<<<< HEAD
 
         <!-- MySQL Connector -->
         <dependency>
@@ -38,19 +55,30 @@
         </dependency>
 
         <!-- Gson -->
+=======
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>9.3.0</version>
+        </dependency>
+>>>>>>> 2a7c6fe (Home and others codes)
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.10.1</version>
             <type>jar</type>
         </dependency>
+<<<<<<< HEAD
 
         <!-- Jakarta JSON API -->
+=======
+>>>>>>> 2a7c6fe (Home and others codes)
         <dependency>
             <groupId>jakarta.json</groupId>
             <artifactId>jakarta.json-api</artifactId>
             <version>2.1.0</version>
         </dependency>
+<<<<<<< HEAD
 
         <!-- JUnit Jupiter API for testing -->
         <dependency>
@@ -73,20 +101,34 @@
     <build>
         <plugins>
             <!-- Compiler plugin -->
+=======
+    </dependencies>
+    
+    <build>
+        <plugins>
+>>>>>>> 2a7c6fe (Home and others codes)
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
+<<<<<<< HEAD
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
+=======
+                    <source>11</source>
+                    <target>11</target>
+>>>>>>> 2a7c6fe (Home and others codes)
                     <compilerArguments>
                         <endorseddirs>${endorsed.dir}</endorseddirs>
                     </compilerArguments>
                 </configuration>
             </plugin>
+<<<<<<< HEAD
 
             <!-- WAR plugin -->
+=======
+>>>>>>> 2a7c6fe (Home and others codes)
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
@@ -95,8 +137,11 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
+<<<<<<< HEAD
 
             <!-- Dependency plugin -->
+=======
+>>>>>>> 2a7c6fe (Home and others codes)
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -122,6 +167,7 @@
                     </execution>
                 </executions>
             </plugin>
+<<<<<<< HEAD
 
             <!-- Surefire plugin for running JUnit 5 tests -->
             <plugin>
@@ -139,3 +185,8 @@
         </plugins>
     </build>
 </project>
+=======
+        </plugins>
+    </build>
+</project>
+>>>>>>> 2a7c6fe (Home and others codes)

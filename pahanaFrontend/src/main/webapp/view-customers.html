@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <title>View Customers - Pahana Edu</title>
   <style>
+<<<<<<< HEAD
   /* Global Styles */
   body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -294,10 +295,80 @@
 
     <!-- Popup Container -->
     <div class="popup-container" id="popupContainer"></div>
+=======
+    /* ... your existing CSS ... */
+    body {
+      background-color: white;
+      padding: 1.5rem;
+      font-family: Arial, sans-serif;
+    }
+    h1 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      color: #1e40af;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .overflow-x-auto { overflow-x: auto; }
+    table {
+      width: 100%;
+      background-color: white;
+      border-collapse: collapse;
+      border: 1px solid #e5e7eb;
+    }
+    thead { background-color: #bfdbfe; text-align: left; }
+    th, td {
+      padding: 0.5rem 1rem;
+      border: 1px solid #e5e7eb;
+    }
+    tbody tr:hover { background-color: #f3f4f6; }
+    tbody { font-size: 0.875rem; }
+    .text-center { text-align: center; }
+    .text-red-500 { color: #ef4444; }
+    .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+    #searchInput {
+      width: 100%;
+      padding: 0.5rem 1rem;
+      margin-bottom: 1rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 0.375rem;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>👁️ Customer Records</h1>
+
+  <input
+    type="text"
+    id="searchInput"
+    placeholder="Search by Name..."
+    oninput="filterCustomers()"
+  />
+
+  <div class="overflow-x-auto">
+    <table>
+      <thead>
+        <tr>
+          <th>Account Number</th>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Telephone</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody id="customerTableBody">
+        <!-- Data rows go here -->
+      </tbody>
+    </table>
+>>>>>>> 2a7c6fe (Home and others codes)
   </div>
 
   <script>
     let customersData = [];
+<<<<<<< HEAD
     let currentAccountNumber = "";
 
     // Enhanced Popup System
@@ -372,12 +443,36 @@
             <div class="empty-state-icon">📝</div>
             <div>No customers found.</div>
           </td></tr>`;
+=======
+
+    fetch("http://localhost:8080/pahanaBackend/resources/customers")
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);  // Inspect data keys here!
+        customersData = data;
+        renderCustomers(customersData);
+      })
+      .catch(error => {
+        console.error("Error fetching customers:", error);
+        document.getElementById("customerTableBody").innerHTML =
+          `<tr><td colspan="5" class="text-center text-red-500 py-4">Failed to load customers.</td></tr>`;
+      });
+
+    function renderCustomers(customers) {
+      const tableBody = document.getElementById("customerTableBody");
+      tableBody.innerHTML = "";
+
+      if (!customers || customers.length === 0) {
+        tableBody.innerHTML =
+          `<tr><td colspan="5" class="text-center py-4 text-gray-500">No customers found.</td></tr>`;
+>>>>>>> 2a7c6fe (Home and others codes)
         return;
       }
 
       customers.forEach(customer => {
         const row = `
           <tr>
+<<<<<<< HEAD
             <td><strong>${customer.accountNumber}</strong></td>
             <td>${customer.name}</td>
             <td>${customer.address}</td>
@@ -391,12 +486,20 @@
                 🗑️ Delete
               </button>
             </td>
+=======
+            <td>${customer.accountNumber || ""}</td>
+            <td>${customer.name || ""}</td>
+            <td>${customer.address || ""}</td>
+            <td>${customer.telephone || ""}</td>
+            <td>${customer.email || ""}</td>
+>>>>>>> 2a7c6fe (Home and others codes)
           </tr>
         `;
         tableBody.insertAdjacentHTML("beforeend", row);
       });
     }
 
+<<<<<<< HEAD
     // Enhanced search with debouncing
     let searchTimeout;
     function filterCustomers() {
@@ -504,3 +607,15 @@
   </script>
 </body>
 </html>
+=======
+    function filterCustomers() {
+      const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+      const filtered = customersData.filter(c =>
+        c.name.toLowerCase().includes(searchTerm)
+      );
+      renderCustomers(filtered);
+    }
+  </script>
+</body>
+</html>
+>>>>>>> 2a7c6fe (Home and others codes)
