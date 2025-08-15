@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Login - Pahana Edu BookShop</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    * {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .gradient-bg {
+  background: linear-gradient(120deg, #2c136f 0%, #3d1c66 100%);
+}
+
+    .login-card {
+      backdrop-filter: blur(20px);
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+    }
+
+    .glass-input {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+      color: white;
+    }
+
+    .glass-input::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .glass-input:focus {
+      background: rgba(255, 255, 255, 0.25);
+      border-color: rgba(255, 255, 255, 0.5);
+      outline: none;
+    }
+
+    .login-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    /* Updated error message styling */
+    #errorMsg {
+  background: rgba(255, 65, 65, 0.2);         /* Softer red background */
+  color: #ff2e2e;                             /* Bright clear text */
+  font-weight: 600;
+  border: 1px solid rgba(255, 50, 50, 0.5);   /* More visible border */
+  padding: 14px 16px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(255, 0, 0, 0.2); /* Subtle glow */
+  display: none;
+  animation: fadeIn 0.3s ease-in-out;
+  backdrop-filter: blur(4px);                /* Glassy feel */
+}
+
+/* Show class to toggle */
+#errorMsg.show {
+  display: block;
+}
+
+/* Optional fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+  </style>
+</head>
+<body class="gradient-bg min-h-screen flex items-center justify-center">
+  <!-- Login Card -->
+  <div class="login-card p-8 rounded-2xl w-full max-w-sm">
+    <div class="text-center mb-8">
+      <div class="text-6xl mb-4">🔐</div>
+      <h2 class="text-3xl font-bold text-white">Admin Login</h2>
+      <p class="text-white/80 mt-2">Welcome back to Pahana Edu</p>
+    </div>
+
+    <form id="loginForm" class="space-y-6">
+      <div>
+        <label class="block text-sm font-medium text-white mb-2">Username</label>
+        <input 
+          type="text" 
+          id="username" 
+          class="glass-input w-full rounded-lg p-3" 
+          placeholder="Enter username" 
+          required 
+        />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-white mb-2">Password</label>
+        <input 
+          type="password" 
+          id="password" 
+          class="glass-input w-full rounded-lg p-3" 
+          placeholder="Enter password" 
+          required 
+        />
+      </div>
+
+      <!-- Enhanced Error Message -->
+      <div id="errorMsg" class="text-sm">
+        ❌ <span>Invalid username or password</span>
+      </div>
+
+      <button 
+        type="submit" 
+        class="login-btn w-full text-white py-3 rounded-lg font-semibold text-lg"
+      >
+        Login 
+      </button>
+    </form>
+  </div>
+
+  <!-- Script -->
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const errorMsg = document.getElementById('errorMsg');
+
+    loginForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      errorMsg.classList.remove('show'); // Hide error initially
+
+      if (username === 'admin' && password === '12345') {
+        window.location.href = 'admin dashboard.html';
+      } else {
+        errorMsg.classList.add('show'); // Show error if credentials are wrong
+      }
+    });
+  </script>
+</body>
+</html>

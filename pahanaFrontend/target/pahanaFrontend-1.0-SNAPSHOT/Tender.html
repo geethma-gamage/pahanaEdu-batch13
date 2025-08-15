@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pahana Edu Tender Management</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #a8a8a8;
+    }
+    .main-container {
+      min-height: calc(100vh - 200px);
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 font-sans min-h-screen">
+  <div class="container mx-auto px-4 py-6">
+    <h1 class="text-4xl font-bold text-center mb-10 text-blue-800 bg-white rounded-xl shadow-lg py-6">
+      Pahana Edu Tender Management
+    </h1>
+
+    <div id="message" class="hidden p-4 mb-6 rounded-lg text-white text-center font-semibold shadow-lg"></div>
+
+    <div class="grid grid-cols-1 xl:grid-cols-5 gap-8 main-container">
+      <!-- LEFT COLUMN -->
+      <div class="xl:col-span-2 space-y-6">
+        <!-- Add Tender Form -->
+        <div id="addFormContainer" class="bg-white p-8 rounded-2xl shadow-xl border border-blue-100">
+          <h2 class="text-2xl font-bold mb-6 text-gray-800 border-b border-gray-200 pb-3">📝 Add New Tender</h2>
+          <form id="addTenderForm" class="space-y-5">
+            <div class="space-y-2">
+              <label class="block text-sm font-semibold text-gray-700">Title</label>
+              <input type="text" id="title" name="title" placeholder="Enter tender title" required
+                     class="w-full p-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all duration-200" />
+            </div>
+            <div class="space-y-2">
+              <label class="block text-sm font-semibold text-gray-700">Description</label>
+              <textarea id="description" name="description" placeholder="Enter description" rows="3"
+                        class="w-full p-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all duration-200"></textarea>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="space-y-2">
+                <label class="block text-sm font-semibold text-gray-700">Issued Date</label>
+                <input type="date" id="issued_date" name="issued_date" required
+                       class="w-full p-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all duration-200" />
+              </div>
+              <div class="space-y-2">
+                <label class="block text-sm font-semibold text-gray-700">Deadline</label>
+                <input type="date" id="deadline" name="deadline" required
+                       class="w-full p-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all duration-200" />
+              </div>
+            </div>
+            <div class="space-y-2">
+              <label class="block text-sm font-semibold text-gray-700">Contact Email</label>
+              <input type="email" id="email" name="email" placeholder="email@example.com" required
+                     class="w-full p-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all duration-200" />
+            </div>
+            <div class="space-y-2">
+              <label class="block text-sm font-semibold text-gray-700">Budget (Rs.)</label>
+              <input type="number" id="budget" name="budget" placeholder="0.00" step="0.01" required
+                     class="w-full p-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all duration-200" />
+            </div>
+            <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold px-6 py-3 rounded-lg shadow-lg transition-all duration-200 transform hover:scale-105">
+              ➕ Add Tender
+            </button>
+          </form>
+        </div>
+
+        <!-- Update Tender Form -->
+        <div id="updateTenderFormContainer" class="hidden bg-white p-8 rounded-2xl shadow-xl border border-green-100">
+          <h2 class="text-2xl font-bold mb-6 text-gray-800 border-b border-gray-200 pb-3">✏️ Update Tender</h2>
+          <form id="updateTenderForm" class="space-y-5">
+            <input type="hidden" id="updateTenderId" name="tender_id" />
+            <div class="space-y-2">
+              <label class="block text-sm font-semibold text-gray-700">Title</label>
+              <input type="text" id="updateTitle" name="title" placeholder="Enter tender title" required
+                     class="w-full p-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-green-400 transition-all duration-200" />
+            </div>
+            <div class="space-y-2">
+              <label class="block text-sm font-semibold text-gray-700">Description</label>
+              <textarea id="updateDescription" name="description" placeholder="Enter description" rows="3"
+                        class="w-full p-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-green-400 transition-all duration-200"></textarea>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="space-y-2">
+                <label class="block text-sm font-semibold text-gray-700">Issued Date</label>
+                <input type="date" id="updateIssuedDate" name="issued_date" required
+                       class="w-full p-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-green-400 transition-all duration-200" />
+              </div>
+              <div class="space-y-2">
+                <label class="block text-sm font-semibold text-gray-700">Deadline</label>
+                <input type="date" id="updateDeadline" name="deadline" required
+                       class="w-full p-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-green-400 transition-all duration-200" />
+              </div>
+            </div>
+            <div class="space-y-2">
+              <label class="block text-sm font-semibold text-gray-700">Contact Email</label>
+              <input type="email" id="updateEmail" name="email" placeholder="email@example.com" required
+                     class="w-full p-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-green-400 transition-all duration-200" />
+            </div>
+            <div class="space-y-2">
+              <label class="block text-sm font-semibold text-gray-700">Budget (Rs.)</label>
+              <input type="number" id="updateBudget" name="budget" placeholder="0.00" step="0.01" required
+                     class="w-full p-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-green-400 transition-all duration-200" />
+            </div>
+            <div class="flex gap-4">
+              <button type="submit" class="flex-1 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-semibold px-6 py-3 rounded-lg shadow-lg transition-all duration-200 transform hover:scale-105">
+                ✅ Update Tender
+              </button>
+              <button type="button" id="cancelUpdate" class="flex-1 bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white font-semibold px-4 py-3 rounded-lg shadow-lg transition-all duration-200 transform hover:scale-105">
+                ❌ Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="xl:col-span-3">
+        <div class="bg-white rounded-2xl shadow-xl border border-gray-100 h-full flex flex-col">
+          <div class="p-6 border-b border-gray-200">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">📊 Tenders Database</h2>
+            <div class="flex gap-2">
+              <input type="text" id="searchInput" placeholder="🔍 Search by tender title..." class="flex-grow p-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all duration-200" />
+              <button id="clearSearch" class="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-6 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 shadow-lg">
+                Clear
+              </button>
+            </div>
+          </div>
+
+          <div class="flex-1 overflow-hidden">
+            <div class="h-96 overflow-auto custom-scrollbar">
+              <table class="w-full text-sm border-collapse">
+                <thead class="bg-gradient-to-r from-blue-600 to-blue-700 text-white sticky top-0 z-10">
+                  <tr>
+                    <th class="p-4 text-left font-semibold border-r border-blue-500">ID</th>
+                    <th class="p-4 text-left font-semibold border-r border-blue-500">Title</th>
+                    <th class="p-4 text-left font-semibold border-r border-blue-500">Description</th>
+                    <th class="p-4 text-left font-semibold border-r border-blue-500">Issued Date</th>
+                    <th class="p-4 text-left font-semibold border-r border-blue-500">Deadline</th>
+                    <th class="p-4 text-left font-semibold border-r border-blue-500">Email</th>
+                    <th class="p-4 text-left font-semibold border-r border-blue-500">Budget</th>
+                    <th class="p-4 text-center font-semibold">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="tendersTableBody" class="text-gray-700"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS Script -->
+  <script>
+    const apiBaseUrl = 'http://localhost:8080/pahanaBackend/resources/tenders';
+    let allTenders = [];
+
+    function showMessage(message, isError = false) {
+      const msg = document.getElementById('message');
+      msg.textContent = message;
+      msg.className = `p-4 mb-6 rounded-lg text-white text-center font-semibold shadow-lg ${isError ? 'bg-gradient-to-r from-red-500 to-red-600' : 'bg-gradient-to-r from-green-500 to-green-600'}`;
+      msg.classList.remove('hidden');
+      setTimeout(() => msg.classList.add('hidden'), 4000);
+    }
+
+    async function fetchTenders() {
+      try {
+        const res = await fetch(apiBaseUrl);
+        allTenders = await res.json();
+        renderTable(allTenders);
+      } catch (e) {
+        showMessage(e.message, true);
+      }
+    }
+
+    function renderTable(tenders) {
+      const tbody = document.getElementById('tendersTableBody');
+      tbody.innerHTML = '';
+
+      if (tenders.length === 0) {
+        const row = document.createElement('tr');
+        row.innerHTML = `<td colspan="8" class="text-center text-gray-500 py-8 text-lg">📭 No tenders found.</td>`;
+        tbody.appendChild(row);
+        return;
+      }
+
+      tenders.forEach((tender, index) => {
+        const row = document.createElement('tr');
+        row.classList.add('hover:bg-blue-50', 'transition-colors', 'duration-150');
+        if (index % 2 === 0) row.classList.add('bg-gray-50');
+
+        row.innerHTML = `
+          <td class="p-4 border-b border-gray-200 font-medium">${tender.tenderId}</td>
+          <td class="p-4 border-b border-gray-200 font-medium">${tender.title}</td>
+          <td class="p-4 border-b border-gray-200 max-w-xs truncate" title="${tender.description}">${tender.description}</td>
+          <td class="p-4 border-b border-gray-200 font-medium">${tender.issuedDate}</td>
+          <td class="p-4 border-b border-gray-200 font-medium">${tender.deadline}</td>
+          <td class="p-4 border-b border-gray-200 font-medium">${tender.email}</td>
+          <td class="p-4 border-b border-gray-200 font-medium">Rs. ${tender.budget?.toFixed(2) || '0.00'}</td>
+          <td class="p-4 border-b border-gray-200 text-center">
+            <div class="flex justify-center gap-2">
+              <button onclick="editTender(${tender.tenderId})" class="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white px-3 py-1 rounded-md text-xs font-semibold transition-all duration-200 transform hover:scale-105 shadow-md">✏️ Edit</button>
+              <button onclick="deleteTender(${tender.tenderId})" class="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-3 py-1 rounded-md text-xs font-semibold transition-all duration-200 transform hover:scale-105 shadow-md">🗑️ Delete</button>
+            </div>
+          </td>`;
+
+        tbody.appendChild(row);
+      });
+    }
+
+    document.getElementById('addTenderForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const tender = {
+        title: form.title.value,
+        description: form.description.value,
+        issuedDate: form.issued_date.value,
+        deadline: form.deadline.value,
+        email: form.email.value,
+        budget: parseFloat(form.budget.value) || 0
+      };
+      try {
+        const res = await fetch(apiBaseUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(tender)
+        });
+        const result = await res.json();
+        if (res.ok) {
+          showMessage('✅ Tender added successfully');
+          form.reset();
+          fetchTenders();
+        } else {
+          showMessage(result.error || 'Failed to add tender', true);
+        }
+      } catch (e) {
+        showMessage(e.message, true);
+      }
+    });
+
+    async function editTender(id) {
+      try {
+        const res = await fetch(`${apiBaseUrl}/${id}`);
+        const tender = await res.json();
+        document.getElementById('updateTenderId').value = tender.tenderId;
+        document.getElementById('updateTitle').value = tender.title;
+        document.getElementById('updateDescription').value = tender.description;
+        document.getElementById('updateIssuedDate').value = tender.issuedDate;
+        document.getElementById('updateDeadline').value = tender.deadline;
+        document.getElementById('updateEmail').value = tender.email;
+        document.getElementById('updateBudget').value = tender.budget;
+
+        document.getElementById('updateTenderFormContainer').classList.remove('hidden');
+        document.getElementById('addFormContainer').classList.add('hidden');
+        document.getElementById('updateTenderFormContainer').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } catch (e) {
+        showMessage(e.message, true);
+      }
+    }
+
+    document.getElementById('updateTenderForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const tender = {
+        tenderId: parseInt(form.tender_id.value),
+        title: form.title.value,
+        description: form.description.value,
+        issuedDate: form.issued_date.value,
+        deadline: form.deadline.value,
+        email: form.email.value,
+        budget: parseFloat(form.budget.value) || 0
+      };
+      try {
+        const res = await fetch(`${apiBaseUrl}/${tender.tenderId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(tender)
+        });
+        const result = await res.json();
+        if (res.ok) {
+          showMessage('✅ Tender updated successfully');
+          document.getElementById('updateTenderFormContainer').classList.add('hidden');
+          document.getElementById('addFormContainer').classList.remove('hidden');
+          fetchTenders();
+        } else {
+          showMessage(result.error || 'Failed to update tender', true);
+        }
+      } catch (e) {
+        showMessage(e.message, true);
+      }
+    });
+
+    document.getElementById('cancelUpdate').addEventListener('click', () => {
+      document.getElementById('updateTenderFormContainer').classList.add('hidden');
+      document.getElementById('addFormContainer').classList.remove('hidden');
+    });
+
+    async function deleteTender(id) {
+      if (!confirm('Are you sure you want to delete this tender?')) return;
+      try {
+        const res = await fetch(`${apiBaseUrl}/${id}`, { method: 'DELETE' });
+        const result = await res.json();
+        if (res.ok) {
+          showMessage('✅ Tender deleted successfully');
+          fetchTenders();
+        } else {
+          showMessage(result.error || 'Failed to delete tender', true);
+        }
+      } catch (e) {
+        showMessage(e.message, true);
+      }
+    }
+
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase();
+      const filtered = allTenders.filter(tender => tender.title.toLowerCase().includes(query));
+      renderTable(filtered);
+    });
+
+    document.getElementById('clearSearch').addEventListener('click', () => {
+      document.getElementById('searchInput').value = '';
+      renderTable(allTenders);
+    });
+
+    fetchTenders();
+  </script>
+</body>
+</html>
