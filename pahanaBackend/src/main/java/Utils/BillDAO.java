@@ -32,6 +32,7 @@ public class BillDAO {
                     int billId = rs.getInt(1);
 
                     try (PreparedStatement itemStmt = conn.prepareStatement(insertItemSQL)) {
+<<<<<<< HEAD
                         if (bill.getItems() != null) {
                             for (BillItem item : bill.getItems()) {
                                 itemStmt.setInt(1, billId);
@@ -42,6 +43,16 @@ public class BillDAO {
                             }
                             itemStmt.executeBatch();
                         }
+=======
+                        for (BillItem item : bill.getItems()) {
+                            itemStmt.setInt(1, billId);
+                            itemStmt.setInt(2, item.getItemId());
+                            itemStmt.setInt(3, item.getQuantity());
+                            itemStmt.setDouble(4, item.getPrice());
+                            itemStmt.addBatch();
+                        }
+                        itemStmt.executeBatch();
+>>>>>>> 0eaa22010d9381ee987b5fed4d5623375a1c03a7
                     }
 
                     conn.commit();
@@ -57,7 +68,11 @@ public class BillDAO {
         }
     }
 
+<<<<<<< HEAD
     // ✅ Get all bills
+=======
+    // ✅ New method to fetch all bills
+>>>>>>> 0eaa22010d9381ee987b5fed4d5623375a1c03a7
     public List<Bill> getAllBills() {
         List<Bill> bills = new ArrayList<>();
         String sql = "SELECT * FROM bills ORDER BY created_at DESC";

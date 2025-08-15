@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 Utils\TenderDAOTest.class
 Utils\BillDAOTest.class
 Utils\CustomerDAOTest.class
 Utils\ItemDAOTest.class
+=======
+Utils\CustomerDAOTest.class
+Utils\ItemDAOTest.class
+Utils\BillDAOTest.class
+>>>>>>> 0eaa22010d9381ee987b5fed4d5623375a1c03a7

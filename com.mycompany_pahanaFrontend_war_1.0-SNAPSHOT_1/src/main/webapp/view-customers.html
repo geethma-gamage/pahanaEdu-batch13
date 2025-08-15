@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>View Customers - Pahana Edu</title>
+  <style>
+    body {
+      background-color: white;
+      padding: 1.5rem; /* 6 * 0.25rem */
+      font-family: Arial, sans-serif;
+    }
+    h1 {
+      font-size: 1.5rem; /* ~ text-2xl */
+      font-weight: bold;
+      margin-bottom: 1rem; /* mb-4 */
+      color: #1e40af; /* blue-800 */
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .overflow-x-auto {
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      background-color: white;
+      border-collapse: collapse;
+      border: 1px solid #e5e7eb; /* gray-200 */
+    }
+    thead {
+      background-color: #bfdbfe; /* blue-100 */
+      text-align: left;
+    }
+    th, td {
+      padding: 0.5rem 1rem; /* px-4 py-2 */
+      border: 1px solid #e5e7eb; /* gray-200 */
+    }
+    tbody tr:hover {
+      background-color: #f3f4f6; /* gray-100 */
+    }
+    tbody {
+      font-size: 0.875rem; /* text-sm */
+    }
+    .text-center {
+      text-align: center;
+    }
+    .text-red-500 {
+      color: #ef4444;
+    }
+    .py-4 {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>👁️ Customer Records</h1>
+  <div class="overflow-x-auto">
+    <table>
+      <thead>
+        <tr>
+          <th>Account Number</th>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Telephone</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody id="customerTableBody">
+        <!-- Data rows go here -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    fetch("http://localhost:8080/pahanaBackend/resources/customers")
+      .then(response => response.json())
+      .then(data => {
+        const tableBody = document.getElementById("customerTableBody");
+        tableBody.innerHTML = "";
+
+        data.forEach(customer => {
+          const row = `
+            <tr>
+              <td>${customer.account_number}</td>
+              <td>${customer.name}</td>
+              <td>${customer.address}</td>
+              <td>${customer.telephone}</td>
+              <td>${customer.email}</td>
+            </tr>
+          `;
+          tableBody.insertAdjacentHTML("beforeend", row);
+        });
+      })
+      .catch(error => {
+        console.error("Error fetching customers:", error);
+        document.getElementById("customerTableBody").innerHTML =
+          `<tr><td colspan="5" class="text-center text-red-500 py-4">Failed to load customers.</td></tr>`;
+      });
+  </script>
+</body>
+</html>

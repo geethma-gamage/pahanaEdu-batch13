@@ -1,4 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: Utils.BillDAOTest
 -------------------------------------------------------------------------------
+<<<<<<< HEAD
 Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.903 s - in Utils.BillDAOTest
+=======
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.299 s - in Utils.BillDAOTest
+>>>>>>> 0eaa22010d9381ee987b5fed4d5623375a1c03a7

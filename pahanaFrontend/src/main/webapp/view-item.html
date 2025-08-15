@@ -47,6 +47,7 @@
     </div>
   </div>
 
+<<<<<<< HEAD
   <!-- Edit Modal -->
   <div id="editModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center hidden">
     <div class="bg-white rounded-lg shadow-lg p-6 w-96">
@@ -79,6 +80,10 @@
 
   <script>
     const apiUrl = 'http://localhost:8080/pahanaBackend/resources/items';
+=======
+  <script>
+    const apiUrl = 'http://localhost:8080/pahanaBackend/resources/items'; // adjust to your actual backend API
+>>>>>>> 0eaa22010d9381ee987b5fed4d5623375a1c03a7
 
     async function loadItems() {
       try {
@@ -105,7 +110,11 @@
             <td class="px-4 py-3 border">Rs. ${item.price?.toFixed(2) || '0.00'}</td>
             <td class="px-4 py-3 border">${item.quantity}</td>
             <td class="px-4 py-3 border text-center space-x-2">
+<<<<<<< HEAD
               <button onclick="openEditModal(${item.id})" class="bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1 rounded">Edit</button>
+=======
+              <button onclick="editItem(${item.id})" class="bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1 rounded">Edit</button>
+>>>>>>> 0eaa22010d9381ee987b5fed4d5623375a1c03a7
               <button onclick="deleteItem(${item.id})" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">Delete</button>
             </td>
           `;
@@ -116,6 +125,7 @@
       }
     }
 
+<<<<<<< HEAD
     function openEditModal(id) {
       fetch(`${apiUrl}/${id}`)
         .then(res => {
@@ -179,6 +189,24 @@
         if (res.ok) {
           alert('✅ Item deleted successfully');
           loadItems();
+=======
+    function editItem(id) {
+      window.location.href = `edit-item.html?id=${id}`;
+    }
+
+    async function deleteItem(id) {
+      const confirmDelete = confirm(`Are you sure you want to delete item ID ${id}?`);
+      if (!confirmDelete) return;
+
+      try {
+        const res = await fetch(`${apiUrl}/${id}`, {
+          method: 'DELETE'
+        });
+
+        if (res.ok) {
+          alert('✅ Item deleted successfully');
+          loadItems(); // refresh table
+>>>>>>> 0eaa22010d9381ee987b5fed4d5623375a1c03a7
         } else {
           const errorText = await res.text();
           throw new Error(errorText || 'Failed to delete');

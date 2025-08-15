@@ -27,7 +27,11 @@ public class ItemDAOTest {
         item.setQuantity(10);
 
         int generatedId = dao.addItem(item);
+<<<<<<< HEAD
         assertFalse(generatedId > 0, "Item insertion failed, invalid generated ID");
+=======
+        assertTrue(generatedId > 0, "Item insertion failed, invalid generated ID");
+>>>>>>> 0eaa22010d9381ee987b5fed4d5623375a1c03a7
         testItemId = generatedId;
     }
 
@@ -47,10 +51,17 @@ public class ItemDAOTest {
     public void testGetAllItems() throws SQLException {
         List<Item> items = dao.getAllItems();
         assertNotNull(items);
+<<<<<<< HEAD
         assertFalse(items.size() > 0, "Item list should not be empty");
         // Optional: Check if test item exists in list
         boolean found = items.stream().anyMatch(i -> i.getId() == testItemId);
         assertFalse(found, "Test item not found in all items list");
+=======
+        assertTrue(items.size() > 0, "Item list should not be empty");
+        // Optional: Check if test item exists in list
+        boolean found = items.stream().anyMatch(i -> i.getId() == testItemId);
+        assertTrue(found, "Test item not found in all items list");
+>>>>>>> 0eaa22010d9381ee987b5fed4d5623375a1c03a7
     }
 
     @Test
@@ -65,7 +76,11 @@ public class ItemDAOTest {
         item.setQuantity(20);
 
         boolean updated = dao.updateItem(item);
+<<<<<<< HEAD
         assertFalse(updated, "Failed to update item");
+=======
+        assertTrue(updated, "Failed to update item");
+>>>>>>> 0eaa22010d9381ee987b5fed4d5623375a1c03a7
 
         Item updatedItem = dao.getItemById(testItemId);
         assertEquals("Updated Item", updatedItem.getName());
@@ -78,7 +93,11 @@ public class ItemDAOTest {
     @Order(5)
     public void testDeleteItem() throws SQLException {
         boolean deleted = dao.deleteItem(testItemId);
+<<<<<<< HEAD
         assertFalse(deleted, "Failed to delete item");
+=======
+        assertTrue(deleted, "Failed to delete item");
+>>>>>>> 0eaa22010d9381ee987b5fed4d5623375a1c03a7
 
         Item deletedItem = dao.getItemById(testItemId);
         assertNull(deletedItem, "Deleted item should not be found");
