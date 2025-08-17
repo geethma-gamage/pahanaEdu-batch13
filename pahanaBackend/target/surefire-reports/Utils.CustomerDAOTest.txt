@@ -1,4 +1,12 @@
 -------------------------------------------------------------------------------
 Test set: Utils.CustomerDAOTest
 -------------------------------------------------------------------------------
+<<<<<<< HEAD
 Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.358 s - in Utils.CustomerDAOTest
+=======
+<<<<<<< HEAD
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.933 s - in Utils.CustomerDAOTest
+=======
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.307 s - in Utils.CustomerDAOTest
+>>>>>>> 0eaa22010d9381ee987b5fed4d5623375a1c03a7
+>>>>>>> a9faf870ba723fa441e582c5a98c095f91a1489a

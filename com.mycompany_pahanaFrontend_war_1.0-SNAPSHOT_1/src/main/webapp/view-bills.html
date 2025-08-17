@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>View Bills - Pahana Edu</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f3f3;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #1a237e;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      padding: 12px 16px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+
+    th {
+      background-color: #1a237e;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tr:hover {
+      background-color: #e3f2fd;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>All Bills - Pahana Edu</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Bill ID</th>
+        <th>Account Number</th>
+        <th>Customer Name</th>
+        <th>Total Amount</th>
+        <th>Created At</th>
+      </tr>
+    </thead>
+    <tbody id="bills-table-body">
+      <!-- Data rows will be inserted here -->
+    </tbody>
+  </table>
+
+  <script>
+    async function fetchBills() {
+      try {
+        const response = await fetch("http://localhost:8080/pahanaBackend/resources/bills");
+        if (!response.ok) throw new Error("Failed to fetch data");
+        const bills = await response.json();
+
+        const tbody = document.getElementById("bills-table-body");
+        tbody.innerHTML = "";
+
+        bills.forEach(bill => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${bill.billId}</td>
+            <td>${bill.accountNumber}</td>
+            <td>${bill.customerName}</td>
+            <td>${bill.totalAmount.toFixed(2)}</td>
+            <td>${bill.createdAt}</td>
+          `;
+          tbody.appendChild(row);
+        });
+
+      } catch (error) {
+        console.error("Error loading bills:", error);
+        document.getElementById("bills-table-body").innerHTML =
+          "<tr><td colspan='5'>Error loading bills</td></tr>";
+      }
+    }
+
+    fetchBills();
+  </script>
+
+</body>
+</html>

@@ -22,7 +22,14 @@ public class BillService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response saveBill(Bill bill) {
         try {
+<<<<<<< HEAD
             System.out.println("📥 Received Bill: " + jsonb.toJson(bill)); // ✅ Debugging
+=======
+<<<<<<< HEAD
+            System.out.println("📥 Received Bill: " + jsonb.toJson(bill)); // ✅ Debugging
+=======
+>>>>>>> 0eaa22010d9381ee987b5fed4d5623375a1c03a7
+>>>>>>> a9faf870ba723fa441e582c5a98c095f91a1489a
             int billId = billDAO.saveBill(bill);
             return Response.status(Response.Status.CREATED)
                            .entity(jsonb.toJson(billId))
@@ -35,7 +42,15 @@ public class BillService {
         }
     }
 
+<<<<<<< HEAD
     // ✅ GET all bills
+=======
+<<<<<<< HEAD
+    // ✅ GET all bills
+=======
+    // ✅ NEW: GET all bills
+>>>>>>> 0eaa22010d9381ee987b5fed4d5623375a1c03a7
+>>>>>>> a9faf870ba723fa441e582c5a98c095f91a1489a
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllBills() {

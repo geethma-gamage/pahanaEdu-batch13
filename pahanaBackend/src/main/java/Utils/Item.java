@@ -7,6 +7,10 @@ public class Item {
     private int quantity;
     private String category;
 
+<<<<<<< HEAD
+=======
+    // Constructors
+>>>>>>> a9faf870ba723fa441e582c5a98c095f91a1489a
     public Item() {}
 
     public Item(int id, String name, double price, int quantity, String category) {

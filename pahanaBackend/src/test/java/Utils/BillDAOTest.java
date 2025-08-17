@@ -27,7 +27,15 @@ public class BillDAOTest {
         // Create Bill
         Bill bill = new Bill();
         bill.setAccountNumber(123456);
+<<<<<<< HEAD
         bill.setCustomerName("Testing 01");
+=======
+<<<<<<< HEAD
+        bill.setCustomerName("Testing 01");
+=======
+        bill.setCustomerName("JUnit Test Customer");
+>>>>>>> 0eaa22010d9381ee987b5fed4d5623375a1c03a7
+>>>>>>> a9faf870ba723fa441e582c5a98c095f91a1489a
         bill.setItems(items);
         bill.setTotalAmount(250.0);
 
