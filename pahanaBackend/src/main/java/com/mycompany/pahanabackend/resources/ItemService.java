@@ -2,6 +2,39 @@ package com.mycompany.pahanabackend.resources;
 
 import Utils.Item;
 import Utils.ItemDAO;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+
+import java.sql.SQLException;
+import java.util.List;
+
+@Path("items")
+public class ItemService {
+
+    private final ItemDAO itemDAO = new ItemDAO();
+
+    // Helper JSON error response
+    private Response jsonError(String message) {
+        return Response.serverError()
+                .entity("{\"error\": \"" + message.replace("\"", "\\\"") + "\"}")
+                .type(MediaType.APPLICATION_JSON)
+                .build();
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAll() {
+        try {
+            List<Item> items = itemDAO.getAllItems();
+            return Response.ok(items).build();
+        } catch (SQLException e) {
+            return jsonError("DB Error: " + e.getMessage());
+=======
+>>>>>>> 8d4a862db93c08c7927b522ee21514342ea94507
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 import jakarta.ws.rs.*;
@@ -24,12 +57,33 @@ public class ItemService {
             return Response.ok(jsonb.toJson(items)).build();
         } catch (SQLException e) {
             return internalServerError("Database error: " + e.getMessage());
+<<<<<<< HEAD
+=======
+>>>>>>> a9faf870ba723fa441e582c5a98c095f91a1489a
+>>>>>>> 8d4a862db93c08c7927b522ee21514342ea94507
         }
     }
 
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    public Response getOne(@PathParam("id") int id) {
+        try {
+            Item item = itemDAO.getItem(id);
+            if (item == null) {
+                return Response.status(Response.Status.NOT_FOUND)
+                        .entity("{\"error\": \"Item not found\"}")
+                        .type(MediaType.APPLICATION_JSON)
+                        .build();
+            }
+            return Response.ok(item).build();
+        } catch (SQLException e) {
+            return jsonError("DB Error: " + e.getMessage());
+=======
+>>>>>>> 8d4a862db93c08c7927b522ee21514342ea94507
     public Response getItemById(@PathParam("id") int id) {
         try {
             Item item = itemDAO.getItemById(id);
@@ -40,12 +94,33 @@ public class ItemService {
             }
         } catch (SQLException e) {
             return internalServerError("Database error: " + e.getMessage());
+<<<<<<< HEAD
+=======
+>>>>>>> a9faf870ba723fa441e582c5a98c095f91a1489a
+>>>>>>> 8d4a862db93c08c7927b522ee21514342ea94507
         }
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    public Response add(Item item) {
+        try {
+            if (itemDAO.addItem(item)) {
+                return Response.status(Response.Status.CREATED).build();
+            } else {
+                return Response.status(Response.Status.BAD_REQUEST)
+                        .entity("{\"error\": \"Insert failed\"}")
+                        .type(MediaType.APPLICATION_JSON)
+                        .build();
+            }
+        } catch (SQLException e) {
+            return jsonError("DB Error: " + e.getMessage());
+=======
+>>>>>>> 8d4a862db93c08c7927b522ee21514342ea94507
     public Response addItem(Item item, @Context UriInfo uriInfo) {
         try {
             if (item.getName() == null || item.getName().isEmpty()) {
@@ -68,6 +143,10 @@ public class ItemService {
                         .build();
             }
             return internalServerError("Database error: " + e.getMessage());
+<<<<<<< HEAD
+=======
+>>>>>>> a9faf870ba723fa441e582c5a98c095f91a1489a
+>>>>>>> 8d4a862db93c08c7927b522ee21514342ea94507
         }
     }
 
@@ -75,6 +154,24 @@ public class ItemService {
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    public Response update(@PathParam("id") int id, Item item) {
+        try {
+            item.setId(id);
+            if (itemDAO.updateItem(item)) {
+                return Response.ok().build();
+            } else {
+                return Response.status(Response.Status.NOT_FOUND)
+                        .entity("{\"error\": \"Item not found\"}")
+                        .type(MediaType.APPLICATION_JSON)
+                        .build();
+            }
+        } catch (SQLException e) {
+            return jsonError("DB Error: " + e.getMessage());
+=======
+>>>>>>> 8d4a862db93c08c7927b522ee21514342ea94507
     public Response updateItem(@PathParam("id") int id, Item updatedItem) {
         try {
             updatedItem.setId(id);
@@ -93,12 +190,35 @@ public class ItemService {
                         .build();
             }
             return internalServerError("Database error: " + e.getMessage());
+<<<<<<< HEAD
+=======
+>>>>>>> a9faf870ba723fa441e582c5a98c095f91a1489a
+>>>>>>> 8d4a862db93c08c7927b522ee21514342ea94507
         }
     }
 
     @DELETE
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    public Response delete(@PathParam("id") int id) {
+        try {
+            if (itemDAO.deleteItem(id)) {
+                return Response.ok().build();
+            } else {
+                return Response.status(Response.Status.NOT_FOUND)
+                        .entity("{\"error\": \"Item not found\"}")
+                        .type(MediaType.APPLICATION_JSON)
+                        .build();
+            }
+        } catch (SQLException e) {
+            return jsonError("DB Error: " + e.getMessage());
+        }
+    }
+=======
+>>>>>>> 8d4a862db93c08c7927b522ee21514342ea94507
     public Response deleteItem(@PathParam("id") int id) {
         try {
             if (itemDAO.deleteItem(id)) {
@@ -143,4 +263,8 @@ public class ItemService {
         public String getMessage() { return message; }
         public void setMessage(String message) { this.message = message; }
     }
+<<<<<<< HEAD
+=======
+>>>>>>> a9faf870ba723fa441e582c5a98c095f91a1489a
+>>>>>>> 8d4a862db93c08c7927b522ee21514342ea94507
 }

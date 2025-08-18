@@ -7,7 +7,14 @@ public class Item {
     private int quantity;
     private String category;
 
+<<<<<<< HEAD
     // Constructors
+=======
+<<<<<<< HEAD
+=======
+    // Constructors
+>>>>>>> a9faf870ba723fa441e582c5a98c095f91a1489a
+>>>>>>> 8d4a862db93c08c7927b522ee21514342ea94507
     public Item() {}
 
     public Item(int id, String name, double price, int quantity, String category) {

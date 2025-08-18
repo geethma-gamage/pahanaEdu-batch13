@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 0eaa22010d9381ee987b5fed4d5623375a1c03a7
+>>>>>>> a9faf870ba723fa441e582c5a98c095f91a1489a
+>>>>>>> 8d4a862db93c08c7927b522ee21514342ea94507
   <meta charset="UTF-8" />
   <title>Admin Dashboard - Pahana Edu</title>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -36,6 +46,13 @@
       backdrop-filter: blur(10px);
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
       position: relative;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> a9faf870ba723fa441e582c5a98c095f91a1489a
+>>>>>>> 8d4a862db93c08c7927b522ee21514342ea94507
       height: 100vh;           /* full viewport height */
       overflow-y: auto;        /* vertical scrollbar */
       overflow-x: hidden;      /* hide horizontal scrollbar */
@@ -57,6 +74,15 @@
 
     .sidebar::-webkit-scrollbar-thumb:hover {
       background: rgba(255, 255, 255, 0.5);
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+      overflow: hidden;
+>>>>>>> 0eaa22010d9381ee987b5fed4d5623375a1c03a7
+>>>>>>> a9faf870ba723fa441e582c5a98c095f91a1489a
+>>>>>>> 8d4a862db93c08c7927b522ee21514342ea94507
     }
 
     .sidebar::before {
@@ -145,7 +171,18 @@
       display: flex;
       flex-direction: column;
       animation: fadeInUp 0.6s ease;
+<<<<<<< HEAD
       position: relative; /* for ::before */
+=======
+<<<<<<< HEAD
+      position: relative; /* for ::before */
+=======
+<<<<<<< HEAD
+      position: relative; /* for ::before */
+=======
+>>>>>>> 0eaa22010d9381ee987b5fed4d5623375a1c03a7
+>>>>>>> a9faf870ba723fa441e582c5a98c095f91a1489a
+>>>>>>> 8d4a862db93c08c7927b522ee21514342ea94507
     }
 
     @keyframes fadeInUp {
@@ -236,7 +273,18 @@
         width: 100%;
         height: auto;
         position: relative;
+<<<<<<< HEAD
         overflow-y: visible; /* allow natural scrolling on small */
+=======
+<<<<<<< HEAD
+        overflow-y: visible; /* allow natural scrolling on small */
+=======
+<<<<<<< HEAD
+        overflow-y: visible; /* allow natural scrolling on small */
+=======
+>>>>>>> 0eaa22010d9381ee987b5fed4d5623375a1c03a7
+>>>>>>> a9faf870ba723fa441e582c5a98c095f91a1489a
+>>>>>>> 8d4a862db93c08c7927b522ee21514342ea94507
       }
 
       .main-content {
@@ -254,11 +302,31 @@
         <h2 class="text-2xl font-bold mb-8 logo-text">🎓 Admin Panel</h2>
         <ul class="space-y-3">
           <li><button onclick="loadIframe('customer.html')" class="menu-button w-full text-left">👤 Customer Management</button></li>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> a9faf870ba723fa441e582c5a98c095f91a1489a
+>>>>>>> 8d4a862db93c08c7927b522ee21514342ea94507
          
           <li><button onclick="loadIframe('item.html')" class="menu-button w-full text-left">📦 Item Management</button></li>
           
           <li><button onclick="loadIframe('generate-bill.html')" class="menu-button w-full text-left">🖨️ Print Bill</button></li>
          
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+          <li><button onclick="loadIframe('view-customers.html')" class="menu-button w-full text-left">🖨️ view-customer</button></li>
+          <li><button onclick="loadIframe('item.html')" class="menu-button w-full text-left">📦 Item Management</button></li>
+          <li><button onclick="loadIframe('view-item.html')" class="menu-button w-full text-left">📦 View-Items</button></li>
+          <li><button onclick="loadIframe('generate-bill.html')" class="menu-button w-full text-left">🖨️ Print Bill</button></li>
+          
+>>>>>>> 0eaa22010d9381ee987b5fed4d5623375a1c03a7
+>>>>>>> a9faf870ba723fa441e582c5a98c095f91a1489a
+>>>>>>> 8d4a862db93c08c7927b522ee21514342ea94507
           <li><button onclick="loadIframe('view-bills.html')" class="menu-button w-full text-left">📋 View Bills</button></li>
           <li><button onclick="logout()" class="menu-button logout-button w-full text-left">🚪 Logout</button></li>
         </ul>
@@ -326,3 +394,385 @@
   </script>
 </body>
 </html>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+    <meta charset="UTF-8" />
+    <title>Admin Dashboard - Pahana Edu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            background: linear-gradient(180deg, #1e3a8a 0%, #1e40af 50%, #3b82f6 100%);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(147, 51, 234, 0.3) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .sidebar-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-text {
+            background: linear-gradient(45deg, #ffffff, #f0f9ff, #dbeafe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+            }
+            to {
+                filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.6));
+            }
+        }
+
+        /* Menu Button Styling */
+        .menu-button {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            color: white;
+            font-weight: 500;
+        }
+
+        .menu-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .menu-button:hover::before {
+            left: 100%;
+        }
+
+        .menu-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(8px) translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .menu-button:active {
+            transform: translateX(8px) translateY(0);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Logout Button Special Styling */
+        .logout-button {
+            background: linear-gradient(45deg, #ef4444, #dc2626);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .logout-button:hover {
+            background: linear-gradient(45deg, #dc2626, #b91c1c);
+            transform: translateX(8px) translateY(-2px);
+            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+        }
+
+        /* Main Content Styling */
+        .main-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+        }
+
+        /* Iframe Styling */
+        .content-frame {
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .content-frame:hover {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .loading::after {
+            content: '';
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e2e8f0;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Welcome Message */
+        .welcome-message {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 16px;
+            border: 2px dashed #cbd5e1;
+        }
+
+        .welcome-text {
+            font-size: 24px;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 8px;
+        }
+
+        .welcome-subtext {
+            color: #64748b;
+            font-size: 16px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            
+            .main-content {
+                margin: 10px;
+                padding: 16px;
+            }
+            
+            .menu-button:hover {
+                transform: translateY(-2px);
+            }
+        }
+
+        /* Smooth transitions for all elements */
+        * {
+            transition: all 0.3s ease;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 sidebar p-6">
+            <div class="sidebar-content">
+                <h2 class="text-2xl font-bold mb-8 logo-text">🎓 Staff Panel</h2>
+                <ul class="space-y-3">
+                    <li>
+                        <button onclick="loadIframe('view-tenders.html')" class="menu-button w-full text-left">
+                            📄 View Tenders
+                        </button>
+                    </li>
+                    <li>
+                        <button onclick="loadIframe('customer.html')" class="menu-button w-full text-left">
+                            👤 Customer Management
+                        </button>
+                    </li>
+                    <li>
+                        <button onclick="loadIframe('item.html')" class="menu-button w-full text-left">
+                            📦 Item Management
+                        </button>
+                    </li>
+                    <li>
+                        <button onclick="loadIframe('generate-bill.html')" class="menu-button w-full text-left">
+                            🖨️ Print Bill
+                        </button>
+                    </li>
+                    <li>
+                        <button onclick="loadIframe('view-bills.html')" class="menu-button w-full text-left">
+                            📋 View Bills
+                        </button>
+                    </li>
+                    <li>
+                        <button onclick="logout()" class="menu-button logout-button w-full text-left">
+                            🚪 Logout
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="flex-1">
+            <div class="main-content h-full">
+                <iframe 
+                    id="main-frame" 
+                    class="content-frame w-full h-full" 
+                    style="height: calc(100vh - 120px);"
+                    onload="hideLoading()"
+                ></iframe>
+                <div id="welcome-screen" class="welcome-message">
+                    <div class="welcome-text">🎓 Welcome to Pahana Edu Dashboard</div>
+                    <div class="welcome-subtext">Select an option from the sidebar to get started</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function loadIframe(page) {
+            const iframe = document.getElementById('main-frame');
+            const welcomeScreen = document.getElementById('welcome-screen');
+            
+            // Hide welcome screen
+            welcomeScreen.style.display = 'none';
+            
+            // Show loading state
+            iframe.style.display = 'block';
+            iframe.className = 'content-frame w-full h-full loading';
+            
+            // Load the page
+            iframe.src = page;
+            
+            // Update active menu item
+            updateActiveMenuItem(event.target);
+        }
+
+        function hideLoading() {
+            const iframe = document.getElementById('main-frame');
+            iframe.className = 'content-frame w-full h-full';
+        }
+
+        function updateActiveMenuItem(clickedButton) {
+            // Remove active state from all buttons
+            document.querySelectorAll('.menu-button').forEach(btn => {
+                btn.classList.remove('bg-white', 'text-blue-900');
+            });
+            
+            // Add active state to clicked button
+            clickedButton.classList.add('bg-white', 'text-blue-900');
+        }
+
+        function logout() {
+            if (confirm("Are you sure you want to logout?")) {
+                // Add logout animation
+                document.body.style.opacity = '0';
+                document.body.style.transform = 'scale(0.95)';
+                
+                setTimeout(() => {
+                    window.location.href = "home.html";
+                }, 300);
+            }
+        }
+
+        // Initialize welcome screen
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('main-frame').style.display = 'none';
+        });
+
+        // Add keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.altKey) {
+                switch(e.key) {
+                    case '1':
+                        loadIframe('view-tenders.html');
+                        break;
+                    case '2':
+                        loadIframe('customer.html');
+                        break;
+                    case '3':
+                        loadIframe('item.html');
+                        break;
+                    case '4':
+                        loadIframe('generate-bill.html');
+                        break;
+                    case '5':
+                        loadIframe('view-bills.html');
+                        break;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+>>>>>>> 2a7c6fe (Home and others codes)
+>>>>>>> 0eaa22010d9381ee987b5fed4d5623375a1c03a7
+>>>>>>> a9faf870ba723fa441e582c5a98c095f91a1489a
+>>>>>>> 8d4a862db93c08c7927b522ee21514342ea94507

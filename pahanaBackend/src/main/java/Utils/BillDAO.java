@@ -32,6 +32,13 @@ public class BillDAO {
                     int billId = rs.getInt(1);
 
                     try (PreparedStatement itemStmt = conn.prepareStatement(insertItemSQL)) {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> a9faf870ba723fa441e582c5a98c095f91a1489a
+>>>>>>> 8d4a862db93c08c7927b522ee21514342ea94507
                         if (bill.getItems() != null) {
                             for (BillItem item : bill.getItems()) {
                                 itemStmt.setInt(1, billId);
@@ -42,6 +49,22 @@ public class BillDAO {
                             }
                             itemStmt.executeBatch();
                         }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+                        for (BillItem item : bill.getItems()) {
+                            itemStmt.setInt(1, billId);
+                            itemStmt.setInt(2, item.getItemId());
+                            itemStmt.setInt(3, item.getQuantity());
+                            itemStmt.setDouble(4, item.getPrice());
+                            itemStmt.addBatch();
+                        }
+                        itemStmt.executeBatch();
+>>>>>>> 0eaa22010d9381ee987b5fed4d5623375a1c03a7
+>>>>>>> a9faf870ba723fa441e582c5a98c095f91a1489a
+>>>>>>> 8d4a862db93c08c7927b522ee21514342ea94507
                     }
 
                     conn.commit();
@@ -57,7 +80,19 @@ public class BillDAO {
         }
     }
 
+<<<<<<< HEAD
     // ✅ Get all bills
+=======
+<<<<<<< HEAD
+    // ✅ Get all bills
+=======
+<<<<<<< HEAD
+    // ✅ Get all bills
+=======
+    // ✅ New method to fetch all bills
+>>>>>>> 0eaa22010d9381ee987b5fed4d5623375a1c03a7
+>>>>>>> a9faf870ba723fa441e582c5a98c095f91a1489a
+>>>>>>> 8d4a862db93c08c7927b522ee21514342ea94507
     public List<Bill> getAllBills() {
         List<Bill> bills = new ArrayList<>();
         String sql = "SELECT * FROM bills ORDER BY created_at DESC";

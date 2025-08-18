@@ -9,9 +9,28 @@ public class Bill {
     private String customerName;
     private double totalAmount;
     private Timestamp createdAt;
+<<<<<<< HEAD
     private List<BillItem> items;
 
     public Bill() {} // ✅ Needed for JSON-B
+=======
+<<<<<<< HEAD
+    private List<BillItem> items;
+
+    public Bill() {} // ✅ Needed for JSON-B
+=======
+<<<<<<< HEAD
+    private List<BillItem> items;
+
+    public Bill() {} // ✅ Needed for JSON-B
+=======
+
+    private List<BillItem> items; // Optional for saveBill()
+
+    // Getters and Setters for all fields
+>>>>>>> 0eaa22010d9381ee987b5fed4d5623375a1c03a7
+>>>>>>> a9faf870ba723fa441e582c5a98c095f91a1489a
+>>>>>>> 8d4a862db93c08c7927b522ee21514342ea94507
 
     public int getBillId() {
         return billId;
@@ -61,3 +80,13 @@ public class Bill {
         this.items = items;
     }
 }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0eaa22010d9381ee987b5fed4d5623375a1c03a7
+>>>>>>> a9faf870ba723fa441e582c5a98c095f91a1489a
+>>>>>>> 8d4a862db93c08c7927b522ee21514342ea94507
