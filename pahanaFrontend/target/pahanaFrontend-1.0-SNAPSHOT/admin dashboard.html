@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Dashboard - Pahana Edu</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+    * {
+      font-family: 'Inter', sans-serif;
+      transition: all 0.3s ease;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    body {
+      background: linear-gradient(270deg, #667eea, #764ba2, #f093fb);
+      background-size: 600% 600%;
+      animation: gradientShift 12s ease infinite;
+      min-height: 100vh;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .sidebar {
+      background: linear-gradient(180deg, #1e3a8a, #1e40af, #3b82f6);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      position: relative;
+      height: 100vh;           /* full viewport height */
+      overflow-y: auto;        /* vertical scrollbar */
+      overflow-x: hidden;      /* hide horizontal scrollbar */
+    }
+
+    /* Sidebar custom scrollbar */
+    .sidebar::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .sidebar::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 4px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    .sidebar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.3), transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(147, 51, 234, 0.3), transparent 50%);
+      pointer-events: none;
+    }
+
+    .sidebar-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .logo-text {
+      background: linear-gradient(45deg, #ffffff, #f0f9ff, #dbeafe);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      animation: glow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3)); }
+      to { filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.7)); }
+    }
+
+    .menu-button {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-bottom: 8px;
+      color: white;
+      font-weight: 500;
+      cursor: pointer;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .menu-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.5s;
+    }
+
+    .menu-button:hover::before {
+      left: 100%;
+    }
+
+    .menu-button:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+    }
+
+    .logout-button {
+      background: linear-gradient(45deg, #ef4444, #dc2626);
+      color: white;
+    }
+
+    .logout-button:hover {
+      background: linear-gradient(45deg, #dc2626, #b91c1c);
+      box-shadow: 0 10px 20px rgba(239, 68, 68, 0.4);
+      transform: scale(1.05);
+    }
+
+    .main-content {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      margin: 20px;
+      padding: 24px;
+      height: 100%;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      animation: fadeInUp 0.6s ease;
+      position: relative; /* for ::before */
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .main-content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+    }
+
+    .content-frame {
+      flex: 1 1 auto;
+      width: 100%;
+      border-radius: 16px;
+      border: 2px solid rgba(102, 126, 234, 0.2);
+      display: none;
+      transition: all 0.3s ease;
+    }
+
+    .content-frame:hover {
+      transform: scale(1.01);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .welcome-message {
+      text-align: center;
+      padding: 80px 20px;
+      border-radius: 20px;
+      border: 2px dashed #cbd5e1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color: #334155;
+      background: rgba(255, 255, 255, 0.6);
+      animation: pulse 2.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.01); opacity: 0.95; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .welcome-text {
+      font-size: 30px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .welcome-subtext {
+      color: #64748b;
+      font-size: 16px;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 4px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        overflow-y: visible; /* allow natural scrolling on small */
+      }
+
+      .main-content {
+        margin: 10px;
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+  <div class="flex h-screen">
+    <!-- Sidebar -->
+    <aside class="w-64 sidebar p-6">
+      <div class="sidebar-content">
+        <h2 class="text-2xl font-bold mb-8 logo-text">🎓 Admin Panel</h2>
+        <ul class="space-y-3">
+          <li><button onclick="loadIframe('customer.html')" class="menu-button w-full text-left">👤 Customer Management</button></li>
+         
+          <li><button onclick="loadIframe('item.html')" class="menu-button w-full text-left">📦 Item Management</button></li>
+          
+          <li><button onclick="loadIframe('generate-bill.html')" class="menu-button w-full text-left">🖨️ Print Bill</button></li>
+         
+          <li><button onclick="loadIframe('view-bills.html')" class="menu-button w-full text-left">📋 View Bills</button></li>
+          <li><button onclick="logout()" class="menu-button logout-button w-full text-left">🚪 Logout</button></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1">
+      <div class="main-content">
+        <iframe id="main-frame" class="content-frame" onload="hideLoading()"></iframe>
+        <div id="welcome-screen" class="welcome-message">
+          <div class="welcome-text">🎓 Welcome to Pahana Edu Dashboard</div>
+          <div class="welcome-subtext">Select an option from the sidebar to get started</div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function loadIframe(page) {
+      const iframe = document.getElementById('main-frame');
+      const welcomeScreen = document.getElementById('welcome-screen');
+      welcomeScreen.style.display = 'none';
+      iframe.style.display = 'block';
+      iframe.src = page;
+      updateActiveMenuItem(event.target);
+    }
+
+    function hideLoading() {
+      document.getElementById('main-frame').classList.remove('loading');
+    }
+
+    function updateActiveMenuItem(clickedButton) {
+      document.querySelectorAll('.menu-button').forEach(btn => {
+        btn.classList.remove('bg-white', 'text-blue-900');
+      });
+      clickedButton.classList.add('bg-white', 'text-blue-900');
+    }
+
+    function logout() {
+      if (confirm("Are you sure you want to logout?")) {
+        document.body.style.opacity = '0';
+        document.body.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          window.location.href = "home.html";
+        }, 300);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      document.getElementById('main-frame').style.display = 'none';
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.altKey) {
+        switch (e.key) {
+          case '1': loadIframe('view-tenders.html'); break;
+          case '2': loadIframe('customer.html'); break;
+          case '3': loadIframe('item.html'); break;
+          case '4': loadIframe('generate-bill.html'); break;
+          case '5': loadIframe('view-bills.html'); break;
+        }
+      }
+    });
+  </script>
+</body>
+</html>
